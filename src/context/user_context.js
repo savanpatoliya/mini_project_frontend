@@ -1,23 +1,22 @@
 import React, { useEffect, useContext, useReducer, useState } from 'react';
 import reducer from "../reducer/user_reducer";
 import {
-    REGISTER_CREATER,
-    LOGIN_CREATER,
-    LOGIN_MEMBER,
     NAME_REGISTER_CHANGE,
     NUMBER_REGISTER_CHANGE,
     EMAIL_REGISTER_CHANGE,
-    PASSWORD_REGISTER_CHANGE
+    PASSWORD_REGISTER_CHANGE,
+    TYPE_LOGIN_CHANGE
 }
 from "../action";
 
 
 const initialState = {
-    type: "",
+    type: "creater",
     name: "",
     email: "",
     password: "",
     number: "",
+    
 }
 
 const UserContext = React.createContext()
@@ -28,6 +27,9 @@ export const UserProvider = ({ children }) => {
     
     
 
+    const setType = (val) => {
+        dispath({type:TYPE_LOGIN_CHANGE, payload: val})
+    }
 
     const setName = (val) => {
         dispath({type: NAME_REGISTER_CHANGE, payload: val})
@@ -43,8 +45,10 @@ export const UserProvider = ({ children }) => {
     }
     
 
+    
+
     return (
-        <UserContext.Provider value={{...state, setName, setNumber, setEmail, setPassword}}>{children}</UserContext.Provider>
+        <UserContext.Provider value={{...state, setName, setNumber, setEmail, setPassword,setType}}>{children}</UserContext.Provider>
       )
 }
 
