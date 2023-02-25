@@ -21,7 +21,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 function SignIn() {
-  const {type, name, email, number, password, setName, setEmail, setNumber, setPassword} = useUserContext();
+  const {type, name, email, number, password, setName, setEmail, setNumber, setPassword, setType} = useUserContext();
   const navigate = useNavigate();
   const [justifyActive, setJustifyActive] = useState('tab1');
 
@@ -33,20 +33,41 @@ function SignIn() {
     setJustifyActive(value);
   };
 
-  const handleClick = (e) => {
+  const handleRegisterClick = async(e) => {
     e.preventDefault();
     const data = {name, number, email, password};
-        console.log("after");
-        axios.post('http://localhost:5000/api/v1/auth/register', data)
+    try{
+      const res = await axios.post("api/v1/auth/register/creater", data);
+
+      if(res){
+        navigate("/main");
+      }
+      else{
+        console.log("somthing went wrong");
+      }
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+
+  const handleLoginClick = (e) => {
+    e.preventDefault();
+
+    const data = {type, email, password};
+    axios.post('api/v1/auth/login', data)
           .then((response) => {
+            console.log("data", data);
             console.log(response);
 
             navigate("/main");
             
 
           }, (error) => {
-            console.log(error);
+
+            console.log(error.response.data.status);
           });
+    
   }
 
   return (
@@ -97,28 +118,36 @@ function SignIn() {
         <div className="d-flex justify-content-around mb-3 ">
 
                 <div class="form-check ">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onChange={(e) => {
+                  if(e.target.checked){
+                    setType("member")
+                  }
+                  }}/>
                 <label class="form-check-label" for="flexRadioDefault1">
                     Member
                 </label>
                 </div>
                 <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked onChange={(e) => {
+                  if(e.target.checked){
+                    setType("creater");
+                  }
+                }}/>
                 <label class="form-check-label" for="flexRadioDefault2">
                     Creator
                 </label>
                 </div>
         </div>
 
-          <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email'/>
-          <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password'/>
+          <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email' value={email} onChange={(e)=>setEmail(e.target.value)}/>
+          <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' value={password} onChange={(e) =>setPassword(e.target.value)}/>
 
           <div className="d-flex justify-content-between mx-4 mb-4">
             <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
             <a href="!#">Forgot password?</a>
           </div>
 
-          <MDBBtn className="mb-4 w-100">Sign in</MDBBtn>
+          <MDBBtn className="mb-4 w-100" onClick={handleLoginClick}>Sign in</MDBBtn>
           <p className="text-center">Not a member? <a href="#!">Register</a></p>
 
         </MDBTabsPane>
@@ -159,7 +188,7 @@ function SignIn() {
             <MDBCheckbox name='flexCheck' id='flexCheckDefault' label='I have read and agree to the terms' />
           </div> */}
 
-          <MDBBtn className="mb-4 w-100" onClick={handleClick}>Sign up</MDBBtn>
+          <MDBBtn className="mb-4 w-100" onClick={handleRegisterClick}>Sign up</MDBBtn>
 
         </MDBTabsPane>
 

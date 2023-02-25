@@ -1,11 +1,9 @@
 import {
-    REGISTER_CREATER,
-    LOGIN_CREATER,
-    LOGIN_MEMBER,
     NAME_REGISTER_CHANGE,
     NUMBER_REGISTER_CHANGE,
     EMAIL_REGISTER_CHANGE,
-    PASSWORD_REGISTER_CHANGE
+    PASSWORD_REGISTER_CHANGE,
+    TYPE_LOGIN_CHANGE
 }
 from "../action";
 
@@ -21,12 +19,7 @@ const user_reducer = (state, action) => {
     
 
 
-    if(action.type === LOGIN_CREATER){
-
-    }
-    if(action.type === LOGIN_MEMBER){
-
-    }
+    
     if(action.type === NAME_REGISTER_CHANGE){
         console.log(action.payload);
         return {...state, name: action.payload}
@@ -43,6 +36,11 @@ const user_reducer = (state, action) => {
     if(action.type === PASSWORD_REGISTER_CHANGE){
         console.log(action.payload);
         return {...state, password: action.payload}
+    }
+    if(action.type === TYPE_LOGIN_CHANGE){
+
+        return {...state, type: action.payload};
+
     }
 
 
