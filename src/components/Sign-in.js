@@ -33,28 +33,29 @@ function SignIn() {
     setJustifyActive(value);
   };
 
-  const handleClick = (e) => {
+  const handleRegisterClick = async(e) => {
     e.preventDefault();
     const data = {name, number, email, password};
-        console.log("after");
-        axios.post('http://localhost:5000/api/v1/auth/register', data)
-          .then((response) => {
-            console.log(response);
-            navigate("/main");
-            
+    try{
+      const res = await axios.post("api/v1/auth/register/creater", data);
 
-          }
-          ).catch(err =>{
-            
-          })
-            
+      if(res){
+        navigate("/main");
+      }
+      else{
+        console.log("somthing went wrong");
+      }
+    }
+    catch(err){
+      console.log(err);
+    }
   }
 
   const handleLoginClick = (e) => {
     e.preventDefault();
 
     const data = {type, email, password};
-    axios.post('http://localhost:5000/api/v1/auth/login', data)
+    axios.post('api/v1/auth/login', data)
           .then((response) => {
             console.log("data", data);
             console.log(response);
@@ -187,7 +188,7 @@ function SignIn() {
             <MDBCheckbox name='flexCheck' id='flexCheckDefault' label='I have read and agree to the terms' />
           </div> */}
 
-          <MDBBtn className="mb-4 w-100" onClick={handleClick}>Sign up</MDBBtn>
+          <MDBBtn className="mb-4 w-100" onClick={handleRegisterClick}>Sign up</MDBBtn>
 
         </MDBTabsPane>
 
