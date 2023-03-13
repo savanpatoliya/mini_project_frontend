@@ -6,7 +6,7 @@ import "./SideNavbar.css";
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 const SideNavbar = () => {
-  const {handleCreateProject} = useDashboradContext()
+  const {handleCloseCreateProject} = useDashboradContext()
   return (
     <div className="row nopadding">
       <div className="sidebar col-auto col-lg-2">
@@ -23,7 +23,7 @@ const SideNavbar = () => {
             </a>
           </li>
           <li>
-            <a href="#" onClick={handleCreateProject}>
+            <a href="#" onClick={handleCloseCreateProject}>
               <i className="fas fa-circle-plus" ></i>Create Project
             </a>
           </li>

@@ -1,4 +1,4 @@
-import {DASHBOARD_EMAIL_CHANGE, DASHBOARD_NAME_CHANGE, DASHBOARD_PROJECT_CHANGE, HANDLE_CREATE_MEMBER, HANDLE_CREATE_PROJECT} from "../action"
+import {DASHBOARD_EMAIL_CHANGE, DASHBOARD_NAME_CHANGE, DASHBOARD_PROJECT_CHANGE, HANDLE_CLOSE_CREATE_MEMBER, HANDLE_CLOSE_CREATE_PROJECT, HANDLE_DISPLAY_MEMBER, CHANGE_PROJECT_ID, SET_MEMBERS} from "../action"
 
 
 
@@ -17,14 +17,23 @@ const dashboard_reducer = (state, action) => {
         console.log(action.payload);
         return {...state, projects: action.payload}
     }
-    if(action.type === HANDLE_CREATE_MEMBER){
+    if(action.type === HANDLE_CLOSE_CREATE_MEMBER){
         return {...state, createMemberFlag: !state.createMemberFlag, createProjectFlag: false};
     }
-    if(action.type === HANDLE_CREATE_PROJECT){
+    if(action.type === HANDLE_CLOSE_CREATE_PROJECT){
         
         return {...state, createProjectFlag: !state.createProjectFlag, createMemberFlag: false};
     }
-
+    if(action.type === HANDLE_DISPLAY_MEMBER){
+        return {...state, displayMemberFlag: !state.displayMemberFlag, createMemberFlag: false, createProjectFlag: false}
+    }
+    if(action.type === CHANGE_PROJECT_ID){
+        console.log(action.payload);
+        return {...state, projectId: action.payload}
+    }
+    if(action.type === SET_MEMBERS){
+        return {...state, members: action.payload}
+    }
 
 
     return state;

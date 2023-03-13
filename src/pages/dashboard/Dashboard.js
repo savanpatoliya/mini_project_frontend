@@ -10,7 +10,7 @@ const Dashboard = () => {
   return (
 
     <div className="row nopadding">
-      <div className="col-lg-auto nopadding" style={{background:"#0A3D9D"}}>
+      <div className="col-lg-auto nopadding" style={{background:"#0A3D9D",height:"100vh"}}>
           <ul className='nopadding'>
             <li>
                 <i class="fa-solid  fa-magnifying-glass fa-2x mx-2 my-3" style={{color:"white"}}></i>
