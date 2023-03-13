@@ -1,9 +1,10 @@
 import React from 'react'
-import CreatorDashboard from '../../components/creatorDashboard/CreatorDashboard'
-import SideNavbar from '../../components/SideNavbar'
+
+import SideNavbar from '../../component/SideNavbar'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
 import "./Dashboard.css"
+import CreatorDashboard from '../../component/creatorDashboard/CreatorDashboard';
 
 const Dashboard = () => {
   return (

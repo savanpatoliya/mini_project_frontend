@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import { useDashboradContext } from '../context/dashboard_context';
+import { useDashboradContext } from '../../context/dashboard_context';
 import axios from 'axios';
 
 const List = () => {
-  const {projects, setProjects} = useDashboradContext();
+  const {projects, setProjects, handleCreateMember} = useDashboradContext();
   useEffect(() => {
     axios.get('/api/v1/dashboard/getUser', {
       withCredentials: true
@@ -38,7 +38,7 @@ const List = () => {
                           <button type="button" class="btn btn-outline-success btn-sm">{project.creaters[0].name}</button>
                           </td>
                           <td className="col-lg-1" style={{verticalAlign:"middle"}}>
-                        
+                          <i className="fas fa-circle-plus fa-2x" onClick={handleCreateMember}></i>
                           </td>
                           <td className="col-lg-2">
                             <div className="d-flex justify-content-between w-75">

@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useReducer, useState } from 'react';
 import reducer from "../reducer/dashboard_reducer"
-import {DASHBOARD_EMAIL_CHANGE, DASHBOARD_NAME_CHANGE, DASHBOARD_PROJECT_CHANGE} from "../action"
+import {DASHBOARD_EMAIL_CHANGE, DASHBOARD_NAME_CHANGE, DASHBOARD_PROJECT_CHANGE, HANDLE_CREATE_MEMBER, HANDLE_CREATE_PROJECT} from "../action"
 
 
 
@@ -11,6 +11,8 @@ const initialState = {
     projects: [],
     members: [],
     tasks: [],
+    createMemberFlag: false,
+    createProjectFlag: false,
 
     
 }
@@ -29,8 +31,18 @@ export const DashboradProvider = ({ children }) => {
     const setProjects = (val) => {
         dispath({type:DASHBOARD_PROJECT_CHANGE, payload: val})
     }
+
+    const handleCreateMember = () => {
+        dispath({type: HANDLE_CREATE_MEMBER});
+    }
+
+    const handleCreateProject = () => {
+        dispath({type: HANDLE_CREATE_PROJECT});
+    }
+
+     
     return (
-        <DashboardContext.Provider value={{...state, setEmail, setName, setProjects}}>{children}</DashboardContext.Provider>
+        <DashboardContext.Provider value={{...state, setEmail, setName, setProjects, handleCreateMember, handleCreateProject}}>{children}</DashboardContext.Provider>
       )
 }
 
