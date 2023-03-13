@@ -42,26 +42,29 @@ const SignIn = () => {
 
     const data = {type, email, password};
     console.log(data);
-    // axios.post('api/v1/auth/login', data)
-    //       .then((response) => {
-    //         console.log("data", data);
-    //         console.log(response);
-
-    //         navigate("/main");
+    axios.post('/api/v1/auth/login', data, {
+      withCredentials: true
+    })
+          .then((response) => {
+            console.log("data", data);
+            console.log(response);
             
 
-    //       }, (error) => {
+            navigate("/dashboard");
+            
 
-    //         console.log(error.response.data.status);
-    //       });
+          }, (error) => {
+
+            console.log(error.response.data.status);
+          });
     
   }
 
   return (
     <>
-      <section className="vh-100">
-        <div className="container-fluid h-custom">
-          <div className="row d-flex justify-content-center align-items-center h-100">
+      
+        <div className="container-fluid mt-5 h-100 align-items-center">
+          <div className="row d-flex justify-content-center align-items-center h-75">
             <div className="col-md-9 col-lg-6 col-xl-5">
               <img
                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
@@ -165,25 +168,8 @@ const SignIn = () => {
             </div>
           </div>
         </div>
-        <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-          <div className="text-white mb-3 mb-md-0"></div>
-
-          <div>
-            <a href="#!" className="text-white me-4">
-              <i className="fab fa-facebook-f"></i>
-            </a>
-            <a href="#!" className="text-white me-4">
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="#!" className="text-white me-4">
-              <i className="fab fa-google"></i>
-            </a>
-            <a href="#!" className="text-white">
-              <i className="fab fa-linkedin-in"></i>
-            </a>
-          </div>
-        </div>
-      </section>
+        
+      
     </>
   );
 };

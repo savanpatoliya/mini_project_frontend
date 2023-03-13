@@ -1,4 +1,5 @@
 @import '~mdb-ui-kit/css/mdb.min.css';
+
 .divider:after,
 .divider:before {
 content: "";

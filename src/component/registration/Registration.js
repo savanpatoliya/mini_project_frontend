@@ -51,10 +51,15 @@ const Registration = () => {
     e.preventDefault();
     const data = {name, number, email, password};
     try{
-      const res = await axios.post("api/v1/auth/register/creater", data);
+      const res = await axios.post("/api/v1/auth/register/creater", data);
 
       if(res){
-        navigate("/main");
+        alert("register successfull");
+        setEmail("")
+        setName("")
+        setNumber("")
+        setPassword("")
+        navigate("/");
       }
       else{
         console.log("somthing went wrong");
@@ -69,9 +74,9 @@ const Registration = () => {
 
   return (
     <>
-      <section className="vh-100">
-        <div className="container-fluid h-custom">
-          <div className="row d-flex justify-content-center align-items-center h-100">
+      
+        <div className="container-fluid h-100 align-items-center">
+          <div className="row d-flex justify-content-center align-items-center h-75">
             <div className="col-md-9 col-lg-6 col-xl-5">
               <img
                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
@@ -121,11 +126,14 @@ const Registration = () => {
                     id="form3Example4"
                     className="form-control"
                     placeholder="Enter Your Name"
+                    value={name}
                     onChange={(e)=>{setName(e.target.value)}}
                   />
                 </div>
+{
 
-                <span className={emailError==="Valid Email"?"text-success":"text-danger"}>{emailError}</span>
+             email &&   <span className={emailError==="Valid Email"?"text-success":"text-danger"}>{emailError}</span>
+}
 
                 <div className="form-group mb-2">
                   <input
@@ -133,21 +141,28 @@ const Registration = () => {
                     id="form3Example3"
                     className="form-control "
                     placeholder="Enter valid email address"
+                    value={email}
                     onChange={validateEmail}
                   />
                 </div>
+              {
+                email && 
                 <span className={passwordError==="Strong Password"?"text-success":"text-danger"}>{passwordError}</span>
+              }
                 <div className="form-group mb-2">
                   <input
                     type="password"
                     id="form3Example4"
                     className="form-control"
                     placeholder="Enter password"
+                    value={password}
                     onChange={validatePassword}
                   />
                 </div>
+{
 
-                <span className={numberError==="Phone Number Valid"?"text-success":"text-danger"}>{numberError}</span>
+    number &&   <span className={numberError==="Phone Number Valid"?"text-success":"text-danger"}>{numberError}</span>
+}
 
                 <div className="form-group mb-2">
                   <input
@@ -155,6 +170,7 @@ const Registration = () => {
                     id="form3Example4"
                     className="form-control"
                     placeholder="Enter Phone"
+                    value={number}
                     onChange={validateNumber}
                   />
                 </div>
@@ -169,25 +185,7 @@ const Registration = () => {
             </div>
           </div>
         </div>
-        <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-          <div className="text-white mb-3 mb-md-0"></div>
-
-          <div>
-            <a href="#!" className="text-white me-4">
-              <i className="fab fa-facebook-f"></i>
-            </a>
-            <a href="#!" className="text-white me-4">
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="#!" className="text-white me-4">
-              <i className="fab fa-google"></i>
-            </a>
-            <a href="#!" className="text-white">
-              <i className="fab fa-linkedin-in"></i>
-            </a>
-          </div>
-        </div>
-      </section>
+        
     </>
   );
 };
