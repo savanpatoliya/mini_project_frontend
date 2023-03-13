@@ -1,10 +1,12 @@
 import React from "react";
+import { useDashboradContext } from "../context/dashboard_context";
 import "./SideNavbar.css";
 // import "@fortawesome/fontawesome-free/css/all.min.css";
 
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 const SideNavbar = () => {
+  const {handleCreateProject} = useDashboradContext()
   return (
     <div className="row nopadding">
       <div className="sidebar col-auto col-lg-2">
@@ -21,8 +23,8 @@ const SideNavbar = () => {
             </a>
           </li>
           <li>
-            <a href="#">
-              <i className="fas fa-circle-plus"></i>Create Project
+            <a href="#" onClick={handleCreateProject}>
+              <i className="fas fa-circle-plus" ></i>Create Project
             </a>
           </li>
           <li>
