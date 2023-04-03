@@ -1,18 +1,17 @@
 import React from 'react'
 import { useDashboradContext } from '../../context/dashboard_context'
-import ListMember from './ListMember'
+import ListTask from './ListTask';
 
-const ListProjectMembers = () => {
+
+
+const ListProjectTask = () => {
     const {handleDisplayMember, handleCloseCreateTask} = useDashboradContext();
   return (
     <>
         <div style={{ height: "10%" }}>
           <div className="d-flex justify-content-between align-items-center h-100">
-            <div>Member Details</div>
+            <div>Task List</div>
             <div>
-            <button type="button" class="btn btn-outline-success" onClick={handleCloseCreateTask}>
-                Add Task   
-              </button>
               <button type="button" class="btn btn-outline-danger" onClick={handleDisplayMember}>
                 Close
               </button>
@@ -24,18 +23,18 @@ const ListProjectMembers = () => {
             <thead>
               <tr style={{background:"#e7e8ea"}}>
                 <th className="col-lg-1">ID</th>
-                <th className="col-lg-3">Member Name</th>
-                <th className="col-lg-3">Member Email</th>
-                <th className="col-lg-2">Member Password</th>
-                <th className="col-lg-1">Task</th>
-                <th className="col-lg-2">Action</th>
+                <th className="col-lg-3">Task Name</th>
+                <th className="col-lg-3">Task Type</th>
+                <th className="col-lg-2">Task Status</th>
+                {/* <th className="col-lg-1">Task</th> */}
+                <th className="col-lg-3">Action</th>
               </tr>
             </thead>
-            <ListMember/>
+            <ListTask/>
           </table>
         </div>
     </>
   )
 }
 
-export default ListProjectMembers
+export default ListProjectTask

@@ -80,7 +80,7 @@ const CreateProjectDashboard = () => {
             </div>
             <div className="d-flex justify-content-between">
             <button type="button" class="btn btn-outline-danger btn-sm" onClick={handleCloseCreateProject}>Close</button>
-            <button type="button" class="btn btn-outline-success btn-sm" onClick={handleCreateProject}>Create</button>
+            <button type="button" class="btn btn-outline-success btn-sm" disabled={!projectName} onClick={handleCreateProject}>Create</button>
             </div>
           </form>
         </div>
