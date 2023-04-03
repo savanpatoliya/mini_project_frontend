@@ -3,7 +3,7 @@ import { useDashboradContext } from '../../context/dashboard_context';
 import axios from 'axios';
 
 const List = () => {
-  const {projects, setProjects, handleCloseCreateMember,handleDisplayMember, changeProjectId} = useDashboradContext();
+  const {projects, setProjects, handleCloseCreateMember,handleDisplayMember, changeProjectId, projectId,  handleEditProjectFlag, editProjectFlag} = useDashboradContext();
   useEffect(() => {
     console.log("hello from list compo");
     axios.get('/api/v1/dashboard/getUser', {
@@ -21,6 +21,41 @@ const List = () => {
             console.log(error);
           });
   }, [])
+
+
+  const callApiDeleteProject = async(val) => {
+    try{
+      console.log("here in call api");
+      console.log(projectId)
+      const res = await axios.delete(`/api/v1/dashboard/deleteProject/${val}`, {
+        withCredentials:true,
+      })
+
+      const data = await axios.get("/api/v1/dashboard/getUser", {withCredentials: true});
+      console.log("got data in delete : " + data.data);
+      setProjects(data.data.projects);
+
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+
+  const deleteProject = (val) => {
+    // changeProjectId(val);
+    // console.log("hii from delete");
+    
+    callApiDeleteProject(val);
+  }
+
+  
+
+
+  
+  
+
+  
+
   return (
     
    <>
@@ -52,10 +87,17 @@ const List = () => {
                               <button
                                 type="button"
                                 class="btn btn-outline-secondary btn-sm"
+                                onClick={(e) => {changeProjectId(project._id);handleEditProjectFlag()}}
                               >
                                 Edit
                               </button>
-                              <button type="button" class="btn btn-outline-danger btn-sm">
+                              <button type="button" class="btn btn-outline-danger btn-sm" onClick={() => {
+                                // console.log("first")
+                                // console.log("project id :", projectId)
+                                // changeProjectId(project._id);
+                                // console.log("")
+                                deleteProject(project._id);
+                              }}>
                                 Delete
                               </button>
                             </div>

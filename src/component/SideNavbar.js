@@ -6,15 +6,15 @@ import "./SideNavbar.css";
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 const SideNavbar = () => {
-  const {handleCloseCreateProject} = useDashboradContext()
+  const {handleCloseCreateProject, handleKanbanBoardFlag} = useDashboradContext()
   return (
     <div className="row nopadding">
       <div className="sidebar col-auto col-lg-2">
         <h2>Dashboard</h2>
         <ul>
           <li>
-            <a href="#">
-              <i className="fas fa-envelope"></i>Kanban Board
+            <a href="#" onClick={handleKanbanBoardFlag}>
+              <i className="fas fa-envelope" ></i>Kanban Board
             </a>
           </li>
           <li>
@@ -27,26 +27,7 @@ const SideNavbar = () => {
               <i className="fas fa-circle-plus" ></i>Create Project
             </a>
           </li>
-          <li>
-            <a href="#">
-              <i className="fas fa-project-diagram"></i>portfolio
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i className="fas fa-blog"></i>Blogs
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i className="fas fa-address-book"></i>Contact
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i className="fas fa-map-pin"></i>Map
-            </a>
-          </li>
+
         </ul>
         {/* <div className="social_media">
           <a href="#">
