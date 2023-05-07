@@ -3,7 +3,10 @@ import axios from 'axios';
 import { useDashboradContext } from '../../context/dashboard_context';
 
 const ListTask = () => {
-  const {projectId, memberId, setSelectedTask, selectedTasks, taskId, changeTaskId} = useDashboradContext();
+  const {projectId, memberId, setSelectedTask, selectedTasks, taskId, changeTaskId, handleEditTask} = useDashboradContext();
+
+
+  
 
   const getSelectedTask = async() => {
     console.log(projectId);
@@ -52,6 +55,8 @@ const ListTask = () => {
   }
 
 
+  
+
   return (
     
    <>
@@ -77,6 +82,8 @@ const ListTask = () => {
                               <button
                                 type="button"
                                 class="btn btn-outline-secondary btn-sm"
+                                onClick={() => {changeTaskId(task._id);
+                                  handleEditTask();}}
                                 
                               >
                                 Edit

@@ -5,13 +5,16 @@ import ListTask from './ListTask';
 
 
 const ListProjectTask = () => {
-    const {handleDisplayMember, handleCloseCreateTask} = useDashboradContext();
+    const {handleDisplayMember, handleCloseCreateTask, handleKanbanBoardFlag} = useDashboradContext();
   return (
     <>
         <div style={{ height: "10%" }}>
           <div className="d-flex justify-content-between align-items-center h-100">
             <div>Task List</div>
             <div>
+            <button type="button" class="btn btn-outline-success" onClick={handleKanbanBoardFlag}>
+                show KanbanBoard   
+              </button>
               <button type="button" class="btn btn-outline-danger" onClick={handleDisplayMember}>
                 Close
               </button>

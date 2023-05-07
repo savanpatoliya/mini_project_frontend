@@ -18,7 +18,7 @@ const SideNavbar = () => {
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="#" onClick={handleCloseCreateProject}>
               <i className="fas fa-gear"></i>Project Manager
             </a>
           </li>

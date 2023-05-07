@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./creatorDashboard.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
@@ -13,6 +13,8 @@ import AssignTask from "../assignTask/AssignTask";
 import EditProject from "../editProject/EditProject";
 import EditMember from "../editMember/EditMember";
 import KanbanBoard from "../kanbanBoard/KanbanBoard";
+import EditKanban from "../editKanban/EditKaban";
+import EditTask from "../editTask/EditTask";
 
 const CreatorDashboard = () => {
   const {
@@ -25,7 +27,70 @@ const CreatorDashboard = () => {
     editProjectFlag,
     editMemberFlag,
     kanbanBoardFlag,
+    email,
+    projects, 
+    members,
+    selectedTasks,
+    setProjects,
+    setMembers,
+    setSelectedTask,
+    handleEditKanbanFlag,
+    handleEditTaskFlag,
   } = useDashboradContext();
+
+  const [tempProjects, setTempProjects] = useState([]);
+  // var tempProjects
+  // var tempMembers
+  // var tempSelectedTasks
+
+  // const handleChange = (e) => {
+  //   const val = e.target.value;
+  //   if(displayTaskFlag){
+  //     if(val === ""){
+  //       setSelectedTask(selectedTasks);
+  //       return;
+  //     }
+  //     const newSelectedTask = selectedTasks.filter((task) => {
+  //       if (task.name.toLowerCase()
+  //               .includes(val.toLowerCase())) { return task; }
+  //     })
+
+  //     setSelectedTask(newSelectedTask);
+
+  //   }
+  //   else if(displayMemberFlag){
+  //     if(val === ""){
+  //       setMembers(members);
+  //       return;
+  //     }
+  //     const newMembers = members.filter((member) => {
+  //       if (member.name.toLowerCase()
+  //               .includes(val.toLowerCase())) { return member; }
+  //     })
+
+  //     setMembers(newMembers);
+
+  //   }
+  //   else{
+  //     console.log("ahiya cheeee");
+  //     if(val === ""){
+  //       setProjects(tempProjects);
+  //       return;
+  //     }
+  //     const newProjects = tempProjects.filter((project) => {
+  //       if (project.name.toLowerCase()
+  //               .includes(val.toLowerCase())) { return project; }
+  //     })
+
+  //     setProjects(newProjects);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   setTempProjects(projects);
+    
+  // }, [])
+
   return (
     <div className="container">
       <div style={{ height: "100vh" }}>
@@ -37,6 +102,7 @@ const CreatorDashboard = () => {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                // onChange={handleChange}
               />
             </form>
             <a class="navbar-brand">Hii ! User</a>
@@ -60,6 +126,10 @@ const CreatorDashboard = () => {
           <EditMember />
         ) : kanbanBoardFlag ? (
           <KanbanBoard />
+        ) : handleEditKanbanFlag ? (
+          <EditKanban />
+        ) : handleEditTaskFlag ? (
+          <EditTask />
         ) : (
           <ProjectList />
         )}

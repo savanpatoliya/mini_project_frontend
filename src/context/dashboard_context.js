@@ -18,6 +18,11 @@ import {
   HANDLE_EDIT_MEMBER_FLAG,
   CHANGE_TASK_ID,
   HANDLE_KANBAN_BOARD_FLAG,
+  CREATE_KANBAN_DATA,
+  UPDATE_KANBAN_DATA,
+  SET_KANBAN_DATA,
+  HANDLE_EDIT_KANBAN,
+  HANDLE_EDIT_TASK,
 } from "../action";
 
 const initialState = {
@@ -29,6 +34,7 @@ const initialState = {
   tasks: [],
   selectedTasks: [],
   status: ["BACKLOG", "SELECTED FOR DEVELOPMENT", "IN PROGRESS", "DONE"],
+  kanbanData: [],
   projectId: "",
   memberId: "",
   taskId: "",
@@ -41,6 +47,8 @@ const initialState = {
   editProjectFlag: false,
   editMemberFlag: false,
   kanbanBoardFlag: false,
+  handleEditKanbanFlag: false,
+  handleEditTaskFlag: false,
 };
 
 const DashboardContext = React.createContext();
@@ -106,6 +114,17 @@ export const DashboradProvider = ({ children }) => {
   const handleKanbanBoardFlag = () => {
     dispath({type: HANDLE_KANBAN_BOARD_FLAG});
   }
+  const handleEditKanban = () => {
+    dispath({type: HANDLE_EDIT_KANBAN});
+  }
+
+  const handleEditTask = () => {
+    dispath({type: HANDLE_EDIT_TASK});
+  }
+
+  const setKanbanData = (val) => {
+    dispath({type: SET_KANBAN_DATA, payload: val})
+  }
 
   
   
@@ -130,7 +149,10 @@ export const DashboradProvider = ({ children }) => {
         handleEditProjectFlag,
         handleEditMemberFlag,
         changeTaskId,
-        handleKanbanBoardFlag
+        handleKanbanBoardFlag,
+        setKanbanData,
+        handleEditKanban,
+        handleEditTask
       }}
     >
       {children}
