@@ -1,4 +1,6 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect } from 'react'
+import { useDashboradContext } from '../../../context/dashboard_context'
 
 const card = [
   {
@@ -31,17 +33,45 @@ const card = [
   },
 ]
 
+
+
+
+
 function Carts({ board }) {
-  const tempCart = card.filter((item) => item.status === board)
-  console.log(tempCart)
+  
+  const {projectId, memberId, setKanbanData, kanbanData} = useDashboradContext();
+  
+
+
+  const getMemberTaskForStatus = async() => {
+    try{
+      const tasks = await axios.post("/api/v1/dashboard/getTaskOfMember", {projectId, memberId}, {
+        withCredentials: true
+      })
+      const filterTask = tasks.data.tasks.filter((item) => {
+        return item.status.toLowerCase() === board.toLowerCase();
+      })
+      setKanbanData(filterTask);
+    }
+    catch(err){
+
+    }
+  }
+
+  useEffect(() => {
+    getMemberTaskForStatus();
+  }, [])
+
+
+  useEffect(() => {
+
+  }, [kanbanData])
+  
   return (
     <>
-      {tempCart.map((item) => {
+      {kanbanData.map((item) => {
         return (
           <div
-            draggable
-            onDragEnd={() => {}}
-            onDragEnter={() => {}}
             style={{
               background: 'white',
               display: 'flex',
@@ -52,7 +82,7 @@ function Carts({ board }) {
               marginBottom: '15px',
             }}
           >
-            <div>{item.title}</div>
+            <div>{item.name}</div>
             <div
               style={{
                 display: 'flex',
@@ -72,7 +102,7 @@ function Carts({ board }) {
                   <path d='M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z' />
                   <path d='M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z' />
                 </svg>
-                <div>medium</div>
+                <div>{item.taskType}</div>
               </div>
               <svg
                 xmlns='http://www.w3.org/2000/svg'

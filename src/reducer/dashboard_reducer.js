@@ -1,4 +1,4 @@
-import {DASHBOARD_EMAIL_CHANGE, DASHBOARD_NAME_CHANGE, DASHBOARD_PROJECT_CHANGE, HANDLE_CLOSE_CREATE_MEMBER, HANDLE_CLOSE_CREATE_PROJECT, HANDLE_DISPLAY_MEMBER, CHANGE_PROJECT_ID, SET_MEMBERS, ADD_TASK_FLAG, CHANGE_MEMBER_ID, HANDLE_CLOSE_DISPLAY_TASK, HANDLE_CLOSE_ASSIGN_TASK_FLAG, SET_SELECTED_TASK, HANDLE_EDIT_PROJECT_FLAG, HANDLE_EDIT_MEMBER_FLAG, CHANGE_TASK_ID, HANDLE_KANBAN_BOARD_FLAG} from "../action"
+import {DASHBOARD_EMAIL_CHANGE, DASHBOARD_NAME_CHANGE, DASHBOARD_PROJECT_CHANGE, HANDLE_CLOSE_CREATE_MEMBER, HANDLE_CLOSE_CREATE_PROJECT, HANDLE_DISPLAY_MEMBER, CHANGE_PROJECT_ID, SET_MEMBERS, ADD_TASK_FLAG, CHANGE_MEMBER_ID, HANDLE_CLOSE_DISPLAY_TASK, HANDLE_CLOSE_ASSIGN_TASK_FLAG, SET_SELECTED_TASK, HANDLE_EDIT_PROJECT_FLAG, HANDLE_EDIT_MEMBER_FLAG, CHANGE_TASK_ID, HANDLE_KANBAN_BOARD_FLAG, CREATE_KANBAN_DATA, UPDATE_KANBAN_DATA, SET_KANBAN_DATA, HANDLE_EDIT_KANBAN, HANDLE_EDIT_TASK} from "../action"
 
 
 
@@ -7,7 +7,7 @@ const dashboard_reducer = (state, action) => {
     if(action.type === DASHBOARD_EMAIL_CHANGE){
         console.log(action.payload);
         return {...state, email: action.payload}
-
+        
     }
     if(action.type === DASHBOARD_NAME_CHANGE){
         console.log(action.payload);
@@ -74,7 +74,25 @@ const dashboard_reducer = (state, action) => {
         return {...state, editMemberFlag: !state.editMemberFlag, displayMemberFlag: false}
     }
     if(action.type === HANDLE_KANBAN_BOARD_FLAG){
-        return {...state, kanbanBoardFlag: !state.kanbanBoardFlag};
+        if(state.kanbanBoardFlag){
+            return {...state, kanbanBoardFlag: !state.kanbanBoardFlag, displayTaskFlag: true}
+        }
+        return {...state, kanbanBoardFlag: !state.kanbanBoardFlag, displayTaskFlag: false};
+    }
+    if(action.type === SET_KANBAN_DATA){
+        return {...state, kanbanData: action.payload}
+    }
+    if(action.type === HANDLE_EDIT_KANBAN){
+        if(state.handleEditKanbanFlag){
+            return {...state, kanbanBoardFlag: true, handleEditKanbanFlag: !state.handleEditKanbanFlag}
+        }
+        return {...state, handleEditKanbanFlag: !state.handleEditKanbanFlag, kanbanBoardFlag: false}
+    }
+    if(action.type === HANDLE_EDIT_TASK){
+        if(state.handleEditTaskFlag){
+            return {...state, handleEditTaskFlag: !state.handleEditTaskFlag, displayTaskFlag: true}
+        }
+        return {...state, handleEditTaskFlag: !state.handleEditTaskFlag, displayTaskFlag: false}
     }
 
 

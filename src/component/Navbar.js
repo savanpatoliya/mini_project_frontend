@@ -19,7 +19,7 @@ const Navbar = () => {
                 {/* <a class="nav-link active mx-2 text-white" aria-current="page" href="#">
                   Dashboard
                 </a> */}
-                <Link to="/main" className=" nav-link active mx-2 text-white ">Dashboard</Link>
+                <Link to="/dashboard" className=" nav-link active mx-2 text-white ">Dashboard</Link>
 
               </li>
               <li class="nav-item px-2">

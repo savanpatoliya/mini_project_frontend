@@ -9,16 +9,17 @@ import NewCart from "./newCart/NewCart";
 import Boards from "./Boards/Boards";
 
 function KanbanBoard() {
-  const {} = useDashboradContext();
+  const {handleKanbanBoardFlag} = useDashboradContext();
   return (
     <>
         <div style={{ height: "10%" }}>
           <div className="d-flex justify-content-between align-items-center h-100">
             <div>KanbanBoard</div>
             <div>
-              <button type="button" class="btn btn-outline-primary">
-                Add New
+              <button type="button" class="btn btn-outline-danger" onClick={handleKanbanBoardFlag}>
+                close
               </button>
+              
             </div>
           </div>
         </div>

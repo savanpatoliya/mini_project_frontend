@@ -6,6 +6,7 @@ import Registration from "./registration/Registration";
 import Navbar from "./Navbar";
 import Main from "../pages/Main";
 import Dashboard from "../pages/dashboard/Dashboard";
+import Test from "./Test";
 
 
 const router = createBrowserRouter([
@@ -25,6 +26,11 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard/>
   },
+  {
+    path: "/test",
+    element: <Test/>
+  },
+  
 
   
 ]);

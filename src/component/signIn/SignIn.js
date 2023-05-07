@@ -8,7 +8,8 @@ import validator from "validator";
 import { useUserContext } from '../../context/user_context';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-
+import {auth, provider} from "../../config"
+import { signInWithPopup } from "firebase/auth";
 const SignIn = () => {
   const navigate = useNavigate();
 
@@ -60,6 +61,40 @@ const SignIn = () => {
     
   }
 
+
+  const handleGoogleLogin = async(e) => {
+    signInWithPopup(auth, provider).then((data) => {
+        // email and call api for token for cookie 
+        console.log("here in sign in with : ", data);
+        const generatedEmail = data.user.email;
+        setEmail(generatedEmail);
+        setPassword(generatedEmail);
+
+        axios.post('/api/v1/auth/google', {
+          email: generatedEmail,
+          type: "creater",
+          
+        }, {
+          withCredentials: true
+        })
+              .then((res) => {
+                if(res.data.valid)
+                console.log("here for response devapanchhi :", res);
+                navigate("/dashboard");
+                
+    
+              }, (error) => {
+                alert("something went wrong");
+                navigate("/");
+                console.log(error.response.data.status);
+              });
+        
+
+        
+
+    })
+  }
+
   return (
     <>
       
@@ -100,6 +135,7 @@ const SignIn = () => {
                   <button
                     type="button"
                     className="btn btn-primary btn-floating mx-1"
+                    onClick={handleGoogleLogin}
                   >
                     <i className="fa fa-google"></i>
                   </button>

@@ -16,6 +16,9 @@ const List = () => {
             if(response.data.projects.length !== 0){
               setProjects(response.data.projects);
             }
+            else{
+              setProjects([]);
+            }
           }, (error) => {
             console.log("here in error");
             console.log(error);
